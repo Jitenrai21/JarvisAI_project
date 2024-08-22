@@ -19,6 +19,7 @@ def sptext():
             return data
         except sr.UnknownValueError:
             print("Couldn't understand the message.")
+            # sptext()
 def speechtx(x):
     engine = pyttsx3.init()
     voices = engine.getProperty("voices")
@@ -29,10 +30,15 @@ def speechtx(x):
     engine.runAndWait()
 
 if __name__ == '__main__':
+    speechtx("Hello I am Jarvis.")
     if 'jarvis' in sptext().lower(): 
         while True:
                 data1 = sptext().lower()
-
+                sites = [['youtube', 'https://www.youtube.com/'], ['chat gpt', 'https://chatgpt.com/'], ['github account', 'https://github.com/Jitenrai21']]
+                for site in sites:
+                    if f'Open {site[0]}'.lower() in data1:
+                        speechtx(f'Opening {site[0]}')
+                        webbrowser.open(site[1])
                 if "how are you" in data1:
                     reply = 'I am doing great, How are you?'
                     speechtx(reply)
@@ -45,10 +51,8 @@ if __name__ == '__main__':
                 elif "time now" in data1:
                     time = datetime.datetime.now().strftime("%I%M%p") #%I gives hour, %M gives minute, %p gives am pm
                     speechtx(time)
-                elif 'youtube' in data1:
-                    webbrowser.open('https://www.youtube.com/')
-                elif 'chat gpt' in data1:
-                    webbrowser.open('https://chatgpt.com/')
+                # elif 'youtube' in data1:
+                #     webbrowser.open('https://www.youtube.com/')
                 elif 'bargaining' in data1:
                     webbrowser.open('https://www.youtube.com/watch?v=X_e5z_XrlzY&list=PLe9t8KT-SdWXaS4thPTG66mazDoJ2-BJq&index=3')
                 elif 'joke' in data1:
@@ -66,5 +70,6 @@ if __name__ == '__main__':
                 # time.sleep(5)
     else:
         print("Call by my name Jarvis for service.")
-        sptext("activate by calling me by my name Jarvis.")
-   
+        speechtx("activate by calling me by my name Jarvis.")
+        # sptext()
+    
